@@ -11,13 +11,19 @@ public class Pong extends JFrame {
 		setTitle(GAME_TITLE);
 		setSize(SCREEN_WIDTH, SCREEN_HEIGHT);
 		setResizable(false);
+		add(new PongPanel());
 		setVisible(true);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
 
 	public static void main(String[] args) {
-		new Pong();
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				new Pong();
+			}
+		});
+	}
+}
+		
 
-}
-}
