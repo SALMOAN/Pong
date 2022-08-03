@@ -11,6 +11,10 @@ import java.awt.Stroke;
 import java.awt.BasicStroke;
 
 public class PongPanel extends JPanel implements ActionListener, KeyListener {
+	
+		boolean gameInitialised = false;
+		Ball ball;
+	
 	public PongPanel() {
 		
 		//Define Constant variables
@@ -18,8 +22,10 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 		final int TIMER_DELAY = 5;
 		//Set Attributes
 		setBackground(BACKGROUND_COLOUR);
+		//
 		Timer timer = new Timer(TIMER_DELAY, this);
 		timer.start();
+		
 	}
 
 	@Override
@@ -47,12 +53,18 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 		
 	}
 	private void update() {
-		
+		if(!gameInitialised) {
+			createObjects();
+			gameInitialised = true;
+		}
 	}
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		paintDottedLine(g);
+		if (gameInitialised) {
+			paintSprite(g, ball);
+		}
 
 }
 	private void paintDottedLine(Graphics g) {
@@ -64,4 +76,12 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 		g2d.dispose();
 		
 	}
+	public void createObjects() {
+		ball = new Ball(getWidth(), getHeight());
+	}
+	private void paintSprite(Graphics g, Sprite sprite) {
+		g.setColor(sprite.getColour());
+		g.fillRect(sprite.getXPosition(), sprite.getYPosition(), sprite.getWidth(), sprite.getHeight());
+	}
+	
 }
