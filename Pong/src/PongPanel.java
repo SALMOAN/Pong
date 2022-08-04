@@ -1,8 +1,10 @@
 /**
  * 
- * Possible improvement both move keys held at once, when one is released the paddle is motionless
+ * Possible improvements:
+ *		both move keys held at once, when one is released the paddle is motionless
+ * 		Ball speeds up after bouncing of paddle
  * 
- * Paddles disappear of screen
+ * 
  * 
  */
 
@@ -23,8 +25,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	
 	// Set constant variables
 	
-	private final int BALL_MOVE_SPEED = 4;
-	private final int PADDLE_MOVE_SPEED = 4;
+	private final int BALL_MOVE_SPEED = 8;
+	private final int PADDLE_MOVE_SPEED = 6ssw;
 	private final int SCORE_X_PADDING = 100;
 	private final int SCORE_Y_PADDING = 100;
 	private final int SCORE_FONT_PADDING = 50;
@@ -112,7 +114,6 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 					moveObject(ball);
 					checkWallBounce();
 					checkPaddleBounce();
-					//checkPaddleOut();
 					checkWin();
 					break;
 				}
@@ -176,19 +177,6 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 		}
 		
 	}
-//	private void checkPaddleOut() {
-//		if (paddle1.getyPosition() <= 0 || paddle1.getyPosition() >= getHeight() - paddle1.getHeight()) {
-//			paddle1.setyVelocity(0);
-//		}
-//		if (paddle2.getyPosition() <= 0) {
-//			paddle2.setyVelocity(0);
-//		}
-//			
-//			if (paddle2.getyPosition() >= getHeight() - paddle2.getHeight()) {
-//				paddle2.setyVelocity(0);
-//		}
-//		
-//	}
 	private void resetBall() {
 		ball.resetToInitialPosition();
 	}
