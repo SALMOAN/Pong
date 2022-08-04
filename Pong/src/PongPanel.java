@@ -67,15 +67,15 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent event) {
 		if(event.getKeyCode() == KeyEvent.VK_UP) {
-			paddle2.setYVelocity(-PADDLE_MOVE_SPEED);
+			paddle2.setyVelocity(-PADDLE_MOVE_SPEED);
 		}else if (event.getKeyCode() == KeyEvent.VK_DOWN) {
-			paddle2.setYVelocity(PADDLE_MOVE_SPEED);
+			paddle2.setyVelocity(PADDLE_MOVE_SPEED);
 		}
 		
 		if(event.getKeyCode() == KeyEvent.VK_W) {
-			paddle1.setYVelocity(-PADDLE_MOVE_SPEED);
+			paddle1.setyVelocity(-PADDLE_MOVE_SPEED);
 		}else if (event.getKeyCode() == KeyEvent.VK_S) {
-			paddle1.setYVelocity(PADDLE_MOVE_SPEED);
+			paddle1.setyVelocity(PADDLE_MOVE_SPEED);
 		}
 		
 	}
@@ -83,10 +83,10 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyReleased(KeyEvent event) {
 		if (event.getKeyCode() == KeyEvent.VK_UP || event.getKeyCode() == KeyEvent.VK_DOWN) {
-			paddle2.setYVelocity(0);
+			paddle2.setyVelocity(0);
 		}
 		if (event.getKeyCode() == KeyEvent.VK_W || event.getKeyCode() == KeyEvent.VK_S) {
-			paddle1.setYVelocity(0);
+			paddle1.setyVelocity(0);
 		}
 		
 	}
@@ -102,8 +102,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 			case INITIALISING: {
 				createObjects();
 				gameState = GameState.PLAYING;
-				ball.setXVelocity(BALL_MOVE_SPEED);
-				ball.setYVelocity(BALL_MOVE_SPEED);
+				ball.setxVelocity(BALL_MOVE_SPEED);
+				ball.setyVelocity(BALL_MOVE_SPEED);
 				break;
 				}
 				case PLAYING: {
@@ -112,7 +112,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 					moveObject(ball);
 					checkWallBounce();
 					checkPaddleBounce();
-					checkPaddleOut();
+					//checkPaddleOut();
 					checkWin();
 					break;
 				}
@@ -153,51 +153,51 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	}
 	private void paintSprite(Graphics g, Sprite sprite) {
 		g.setColor(sprite.getColour());
-		g.fillRect(sprite.getXPosition(), sprite.getYPosition(), sprite.getWidth(), sprite.getHeight());
+		g.fillRect(sprite.getxPosition(), sprite.getyPosition(), sprite.getWidth(), sprite.getHeight());
 	}
 	private void moveObject(Sprite obj) {
-		obj.setXPosition(obj.getXPosition() + obj.getXVelocity(), getWidth());
-		obj.setYPosition(obj.getYPosition() + obj.getYVelocity(), getHeight());
+		obj.setxPosition(obj.getxPosition() + obj.getxVelocity(), getWidth());
+		obj.setyPosition(obj.getyPosition() + obj.getyVelocity(), getHeight());
 	}
 	private void checkWallBounce() {
-		if (ball.getXPosition() <= 0) {
-			ball.setXVelocity(ball.getXVelocity() * -1);
+		if (ball.getxPosition() <= 0) {
+			ball.setxVelocity(ball.getxVelocity() * -1);
 			addScore(Player.ONE);
 			resetBall();
 		}
-		else if(ball.getXPosition() >= getWidth() - ball.getWidth()) {
-			ball.setXVelocity(ball.getXVelocity() * -1);
+		else if(ball.getxPosition() >= getWidth() - ball.getWidth()) {
+			ball.setxVelocity(ball.getxVelocity() * -1);
 			addScore(Player.TWO);
 			resetBall();
 		}
 		
-		if (ball.getYPosition() <= 0 || ball.getYPosition() >= getHeight() - ball.getHeight()) {
-			ball.setYVelocity(ball.getYVelocity() * -1);
+		if (ball.getyPosition() <= 0 || ball.getyPosition() >= getHeight() - ball.getHeight()) {
+			ball.setyVelocity(ball.getyVelocity() * -1);
 		}
 		
 	}
-	private void checkPaddleOut() {
-		if (paddle1.getYPosition() <= 0 || paddle1.getYPosition() >= getHeight() - paddle1.getHeight()) {
-			paddle1.setYVelocity(0);
-		}
-		if (paddle2.getYPosition() <= 0) {
-			paddle2.setYVelocity(0);
-		}
-			
-			if (paddle2.getYPosition() >= getHeight() - paddle2.getHeight()) {
-				paddle2.setYVelocity(0);
-		}
-		
-	}
+//	private void checkPaddleOut() {
+//		if (paddle1.getyPosition() <= 0 || paddle1.getyPosition() >= getHeight() - paddle1.getHeight()) {
+//			paddle1.setyVelocity(0);
+//		}
+//		if (paddle2.getyPosition() <= 0) {
+//			paddle2.setyVelocity(0);
+//		}
+//			
+//			if (paddle2.getyPosition() >= getHeight() - paddle2.getHeight()) {
+//				paddle2.setyVelocity(0);
+//		}
+//		
+//	}
 	private void resetBall() {
 		ball.resetToInitialPosition();
 	}
 	private void checkPaddleBounce() {
-		if (ball.getXVelocity() < 0 && ball.getRectangle().intersects(paddle1.getRectangle())) {
-			ball.setXVelocity(BALL_MOVE_SPEED);
+		if (ball.getxVelocity() < 0 && ball.getRectangle().intersects(paddle1.getRectangle())) {
+			ball.setxVelocity(BALL_MOVE_SPEED);
 		}
-		if (ball.getXVelocity() > 0 && ball.getRectangle().intersects(paddle2.getRectangle())) {
-			ball.setXVelocity(-BALL_MOVE_SPEED);
+		if (ball.getxVelocity() > 0 && ball.getRectangle().intersects(paddle2.getRectangle())) {
+			ball.setxVelocity(-BALL_MOVE_SPEED);
 		}
 	}
 	private void addScore(Player player){
