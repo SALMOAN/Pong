@@ -2,6 +2,7 @@
  * 
  * Possible improvements:
  *		both move keys held at once, when one is released the paddle is motionless
+ *				MAke PADDLE_MOVE_SPEED for initial sped value, new variable that increases by one each bounce (checkPaddleBounce()) reset speed in checkWallBounce() if it touches left of right of screen
  * 		Ball speeds up after bouncing of paddle
  * 
  * 
@@ -25,8 +26,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	
 	// Set constant variables
 	
-	private final int BALL_MOVE_SPEED = 8;
-	private final int PADDLE_MOVE_SPEED = 6ssw;
+	private final int BALL_MOVE_SPEED = 4;
+	private final int PADDLE_MOVE_SPEED = 6;
 	private final int SCORE_X_PADDING = 100;
 	private final int SCORE_Y_PADDING = 100;
 	private final int SCORE_FONT_PADDING = 50;
