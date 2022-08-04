@@ -12,8 +12,10 @@ import java.awt.BasicStroke;
 
 public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	
-		boolean gameInitialised = false;
+		GameState gameState = GameState.INITIALISING;
 		Ball ball;
+		Paddle paddle1;
+		Paddle paddle2;
 	
 	public PongPanel() {
 		
@@ -53,17 +55,29 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 		
 	}
 	private void update() {
-		if(!gameInitialised) {
-			createObjects();
-			gameInitialised = true;
+		switch(gameState) {
+			case INITIALISING: {
+				createObjects();
+				gameState = GameState.PLAYING;
+				break;
+				}
+				case PLAYING: {
+					break;
+				}
+			
+				case GAMEOVER: {
+					break;
+				}
 		}
 	}
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		paintDottedLine(g);
-		if (gameInitialised) {
+		if (gameState != GameState.INITIALISING) {
 			paintSprite(g, ball);
+			paintSprite(g, paddle1);
+			paintSprite(g, paddle2);
 		}
 
 }
@@ -78,6 +92,8 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	}
 	public void createObjects() {
 		ball = new Ball(getWidth(), getHeight());
+		paddle1 = new Paddle(Player.ONE, getWidth(), getHeight());
+		paddle2 = new Paddle(Player.TWO, getWidth(), getHeight());
 	}
 	private void paintSprite(Graphics g, Sprite sprite) {
 		g.setColor(sprite.getColour());
