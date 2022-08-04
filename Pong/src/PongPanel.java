@@ -2,6 +2,8 @@
  * 
  * Possible improvement both move keys held at once, when one is released the paddle is motionless
  * 
+ * Paddles disappear of screen
+ * 
  */
 
 import javax.swing.JPanel;
@@ -29,7 +31,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	private final static String SCORE_FONT_FAMILY = "Serif";
 	private final int WIN_X_PADDING = 200;
 	private final int WIN_Y_PADDING = 200;
-	private final static int POINTS_TO_WIN = 3;
+	private final static int POINTS_TO_WIN = 11;
 	private final Color BACKGROUND_COLOUR = Color.BLACK;
 	private final int TIMER_DELAY = 5;
 	
@@ -59,9 +61,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	@Override
-	public void keyTyped(KeyEvent event) {
-		// TODO Auto-generated method stub
-		
+	public void keyTyped(KeyEvent event) {	
 	}
 
 	@Override
@@ -112,6 +112,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 					moveObject(ball);
 					checkWallBounce();
 					checkPaddleBounce();
+					checkPaddleOut();
 					checkWin();
 					break;
 				}
@@ -172,6 +173,19 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 		
 		if (ball.getYPosition() <= 0 || ball.getYPosition() >= getHeight() - ball.getHeight()) {
 			ball.setYVelocity(ball.getYVelocity() * -1);
+		}
+		
+	}
+	private void checkPaddleOut() {
+		if (paddle1.getYPosition() <= 0 || paddle1.getYPosition() >= getHeight() - paddle1.getHeight()) {
+			paddle1.setYVelocity(0);
+		}
+		if (paddle2.getYPosition() <= 0) {
+			paddle2.setYVelocity(0);
+		}
+			
+			if (paddle2.getYPosition() >= getHeight() - paddle2.getHeight()) {
+				paddle2.setYVelocity(0);
 		}
 		
 	}
