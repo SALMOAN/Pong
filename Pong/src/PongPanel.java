@@ -5,6 +5,8 @@
  *				MAke PADDLE_MOVE_SPEED for initial sped value, new variable that increases by one each bounce (checkPaddleBounce()) reset speed in checkWallBounce() if it touches left of right of screen
  * 		Ball speeds up after bouncing of paddle
  * 
+ * 		Score increasing and winner message goes to the wrong player 
+ * 
  * 
  * 
  */
@@ -35,7 +37,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	private final int WIN_X_PADDING = 200;
 	private final int WIN_Y_PADDING = 200;
 	private final static int POINTS_TO_WIN = 11;
-	private final Color BACKGROUND_COLOUR = Color.WHITE;
+	private final Color BACKGROUND_COLOUR = Color.BLACK;
 	private final int TIMER_DELAY = 5;
 	
 	
