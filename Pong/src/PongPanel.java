@@ -35,7 +35,7 @@ public class PongPanel extends JPanel implements ActionListener, KeyListener {
 	private final int WIN_X_PADDING = 200;
 	private final int WIN_Y_PADDING = 200;
 	private final static int POINTS_TO_WIN = 11;
-	private final Color BACKGROUND_COLOUR = Color.BLACK;
+	private final Color BACKGROUND_COLOUR = Color.WHITE;
 	private final int TIMER_DELAY = 5;
 	
 	
